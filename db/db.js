@@ -1,16 +1,19 @@
 const sql=require('mysql')
-const dotenv=require('dotenv')
-dotenv.config()
+// const dotenv=require('dotenv')
+// dotenv.config()
 
 const connection=sql.createConnection({
-    host:process.env.host,
-    user:process.env.user,
-    database:process.env.database,
-    password:process.env.password
+    host:'sql6.freesqldatabase.com',
+    user:'sql6691074',
+    database:'sql6691074',
+    password:'Cazned9AwB'
 })
 
 connection.connect(function(err){
-    if(err){throw err }
+    if(err){
+        console.error("this is error", err)
+        return
+    }
 
     console.log("db is connected")
 })

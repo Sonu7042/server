@@ -2,22 +2,22 @@ const express=require('express')
 const connection=require('./db/db')
 const cors=require('cors')
 const app=express()
-const dotenv=require('dotenv')
-dotenv.config()
+// const dotenv=require('dotenv')
+// dotenv.config()
 
 app.use(express.json())
 app.use(cors())
 
 app.listen(9000,()=>{
-    console.log(`server is listening on ${process.env.port}`)
+    console.log(`server is listening on ${9000}`)
 })
 
 
 app.get('/',(req,res)=>{
-    const userdata="select * from employee"
+    const userdata="select * from company"
     connection.query(userdata,(err,rows)=>{
         if(err){
-            throw err
+            console.error("this is error", err)
         }
         else{
             res.send(rows)
@@ -29,7 +29,7 @@ app.get('/',(req,res)=>{
 
 app.post('/create',(req,res)=>{
     const user=req.body
-    const query="insert into employee set ?"
+    const query="insert into company set ?"
     connection.query(query, user,(err, rows)=>{
         if(err){throw err}
     
@@ -43,7 +43,7 @@ app.post('/create',(req,res)=>{
 
 app.get('/delete/:id',(req,res)=>{
     const id=req.params.id
-    const query="delete from employee where id= ?"
+    const query="delete from company where id= ?"
 
     connection.query(query,[id],(err, result)=>{
         if(err){throw err}
@@ -59,7 +59,7 @@ app.post('/update/:id',(req,res)=>{
     const {name, email, password}=req.body
     // console.log(user, "this is id", id)
     
-    const query='update employee set name = ?, email = ?, password = ? where id = ?'
+    const query='update company set name = ?, email = ?, password = ? where id = ?'
 
     connection.query(query, [name, email, password, id], (err, result)=>{
         if(err){throw err}
