@@ -14,7 +14,7 @@ app.listen(9000,()=>{
 
 
 app.get('/',(req,res)=>{
-    const userdata="select * from company"
+    const userdata="select * from employee"
     connection.query(userdata,(err,rows)=>{
         if(err){
             console.error("this is error", err)
@@ -29,7 +29,7 @@ app.get('/',(req,res)=>{
 
 app.post('/create',(req,res)=>{
     const user=req.body
-    const query="insert into company set ?"
+    const query="insert into employee set ?"
     connection.query(query, user,(err, rows)=>{
         if(err){throw err}
     
@@ -43,7 +43,7 @@ app.post('/create',(req,res)=>{
 
 app.get('/delete/:id',(req,res)=>{
     const id=req.params.id
-    const query="delete from company where id= ?"
+    const query="delete from employee where id= ?"
 
     connection.query(query,[id],(err, result)=>{
         if(err){throw err}
@@ -59,7 +59,7 @@ app.post('/update/:id',(req,res)=>{
     const {name, email, password}=req.body
     // console.log(user, "this is id", id)
     
-    const query='update company set name = ?, email = ?, password = ? where id = ?'
+    const query='update employee set name = ?, email = ?, password = ? where id = ?'
 
     connection.query(query, [name, email, password, id], (err, result)=>{
         if(err){throw err}
